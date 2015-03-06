@@ -1,8 +1,0 @@
-target/
-.DS_Store
-.settings/*.prefs
-.classpath
-dump.rdb
-/bin
-.idea
-mongrel.iml
