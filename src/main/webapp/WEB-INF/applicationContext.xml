@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+<context:component-scan base-package="org.digital.dairy">
+	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+
+    <jpa:repositories base-package="org.digital.dairy.repository.rdbmysql"/>
+<!-- Spring HSQL Database INIT -->
+<!--
+<jdbc:embedded-database type="HSQL" id="dataSource"/>
+-->
+    <bean id="dataSource" class="org.digital.dairy.utils.DBCPConnectionDataSource" destroy-method="close" init-method="configureUrl">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="false" />
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="validationInterval" value="30000" />
+        <property name="timeBetweenEvictionRunsMillis" value="5000" />
+        <property name="minIdle" value="10" />
+        <property name="maxIdle" value="10" />
+        <property name="maxWait" value="10000" />
+        <property name="initialSize" value="10" />
+        <property name="removeAbandonedTimeout" value="60" />
+        <property name="removeAbandoned" value="true" />
+        <property name="logAbandoned" value="true" />
+        <property name="minEvictableIdleTimeMillis" value="30000" />
+        <property name="jmxEnabled" value="true" />
+        <property name="abandonWhenPercentageFull" value="75"/>
+        <property name="jdbcInterceptors"
+                  value="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
+                     org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer;
+                     org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReportJmx(threshold=10000)" />
+    </bean>
+
+<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
+	<property name="packagesToScan" value="org.digital.dairy.entity"/>
+	<property name="dataSource" ref="dataSource"/>
+	<property name="jpaProperties">
+		<props>
+		<prop key="hibernate.show_sql">true</prop>
+		<prop key="hibernate.hbm2ddl.auto">create</prop>
+		</props>
+	</property>
+	<property name="persistenceProvider">
+	<bean class="org.hibernate.ejb.HibernatePersistence"/>
+	</property>
+</bean>
+<!-- Trasaction Mabager INIT -->
+<tx:annotation-driven transaction-manager="transactionManager"/>
+<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="TransactionManager">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
+
+<!-- Spring Security -->
+
+<security:http pattern="/login.html" security="none" />
+<security:http pattern="/registration.html" security="none" />
+
+<security:http use-expressions="true">
+<security:intercept-url  pattern="/**" access="hasRole('ROLE_USER')"/>
+<security:form-login login-page="/login.html"  authentication-failure-url="/login.html?error" default-target-url="/" always-use-default-target="true"/>
+<security:logout invalidate-session="true" logout-success-url="/" logout-url="/logout.html" />
+<!--<security:form-login/>-->
+</security:http>
+
+<!--
+<security:authentication-manager>
+	<security:authentication-provider>
+		<security:user-service>
+			<security:user name="user"
+			password="password"
+			authorities="ROLE_USER"/>
+		</security:user-service>
+	</security:authentication-provider>
+</security:authentication-manager>
+-->
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="customAuthenticationUserDetailsService">
+          <!--  <security:password-encoder hash="md5"/>-->
+        </security:authentication-provider>
+    </security:authentication-manager>
+    <bean id="customAuthenticationUserDetailsService"  class="org.digital.dairy.security.CustomAuthenticationUserDetailsService"></bean>
+
+</beans>

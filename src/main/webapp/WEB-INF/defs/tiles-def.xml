@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!--This is For Login-->
+    <definition name="login" template="/WEB-INF/jsp/login.jsp" >
+        <put-attribute name="title" value="Login to Digital Dairy" />
+        <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
+    </definition>
+    <!--This is For signup-->
+    <definition name="registration" template="/WEB-INF/jsp/registration.jsp" >
+        <put-attribute name="title" value="registration to Digital Dairy" />
+        <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
+    </definition>
+    <!--This is common to all-->
+    <definition name="common" template="/WEB-INF/layouts/common.jsp">
+	    <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
+	  </definition>
+	  
+	  <definition name="index" extends="common">
+	    <put-attribute name="title" value="Digital Dairy" />
+	    <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+	  </definition>
+
+</tiles-definitions>
