@@ -1,37 +1,49 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Pradeep.P
-  Date: 06-04-2015
-  Time: 08:55
-  To change this template use File | Settings | File Templates.
---%>
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title><tiles:getAsString name="title"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Registration</title>
 </head>
 <body>
-
-<form action="demo_form.asp">
-    First name: <input type="text" name="fname" ><br>
-    Last name: <input type="text" name="lname" ><br>
-    Email: <input type="text" name="email"><br>
-    phone no: <input type="text" name="phno" ><br>
-    password: <input type="password" name="password"><br>
-   ReEnter-password: <input type="password" name="repassword"><br>
-
-    <input type="submit" value="Submit">
-</form>
-
-<br><br>
-
-<center>
-    <tiles:insertAttribute name="footer"/>
-</center>
-
-
+<div align="center">
+    <form:form  method="post" commandName="userForm">
+        <table border="0">
+            <tr>
+                <td colspan="2" align="center"><h2>Spring MVC Form Demo - Registration</h2></td>
+            </tr>
+            <tr>
+                <td>First Name:</td>
+                <td><form:input path="firstname" /></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><form:input path="lastname" /></td>
+            </tr>
+            <tr>
+                <td>User Name:</td>
+                <td><form:input path="username" /></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><form:password path="password" /></td>
+            </tr>
+            <tr>
+                <td>E-mail:</td>
+                <td><form:input path="email" /></td>
+            </tr>
+            <tr>
+                <td>phone no:</td>
+                <td><form:input path="phoneno" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Register" /></td>
+            </tr>
+        </table>
+    </form:form>
+</div>
 </body>
 </html>

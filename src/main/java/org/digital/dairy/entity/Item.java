@@ -23,7 +23,7 @@ public class Item {
 	private Integer id;
 	
 	private String title;
-	
+/*
 	private String description;
 	
 	@Column(name="published_date")
@@ -32,6 +32,6 @@ public class Item {
 	private String link;
 	@ManyToOne
 	@JoinColumn(name = "blog_id")
-	private Blog blog;
+	private Blog blog;*/
 	
 }

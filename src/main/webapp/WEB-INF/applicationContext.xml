@@ -15,12 +15,33 @@
 <context:component-scan base-package="org.digital.dairy">
 	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 </context:component-scan>
+  <!--  Mail setting using spring-->
+     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+         <!-- SMTP settings -->
+         <property name="host" value="smtp.gmail.com"/>
+         <property name="port" value="465"/>
+         <property name="username" value="p.d.n.pradeep@gmail.com"/>
+         <property name="password" value="93911263531"/>
+         <!-- additional properties specific to JavaMail -->
+         <property name="javaMailProperties">
+             <props>
+                 <prop key="mail.transport.protocol">smtps</prop>
+                 <prop key="mail.smtps.auth">true</prop>
+                 <prop key="mail.smtp.starttls.enable">true</prop>
+                 <prop key="mail.debug">true</prop>
+                 <prop key="mail.smtp.connectiontimeout>">10000</prop>
+                 <prop key="mail.smtp.timeout">20000</prop>
+                 <prop key="mail.smtp.quitwait">false</prop>
+             </props>
+         </property>
+     </bean>
 
     <jpa:repositories base-package="org.digital.dairy.repository.rdbmysql"/>
 <!-- Spring HSQL Database INIT -->
 <!--
 <jdbc:embedded-database type="HSQL" id="dataSource"/>
 -->
+<!--Spring MYSQL Database INIT-->
     <bean id="dataSource" class="org.digital.dairy.utils.DBCPConnectionDataSource" destroy-method="close" init-method="configureUrl">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="testWhileIdle" value="true" />
@@ -59,8 +80,8 @@
 	</property>
 </bean>
 <!-- Trasaction Mabager INIT -->
-<tx:annotation-driven transaction-manager="transactionManager"/>
-<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="TransactionManager">
+<tx:annotation-driven />
+<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
 	<property name="dataSource" ref="dataSource"/>
 </bean>
 
@@ -69,7 +90,7 @@
 
 <security:http pattern="/login.html" security="none" />
 <security:http pattern="/registration.html" security="none" />
-
+<security:http pattern="/regitrationConfirm.html" security="none" />
 <security:http use-expressions="true">
 <security:intercept-url  pattern="/**" access="hasRole('ROLE_USER')"/>
 <security:form-login login-page="/login.html"  authentication-failure-url="/login.html?error" default-target-url="/" always-use-default-target="true"/>

@@ -26,7 +26,7 @@ public class CustomAuthenticationUserDetailsService implements UserDetailsServic
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
             User user = userRepository.findByUsername(username);
-            LoggedInUserDetails loggedInUserDetails = new LoggedInUserDetails(user.getUsername(),user.getPassword().toLowerCase(),
+            LoggedInUserDetails loggedInUserDetails = new LoggedInUserDetails(user.getUsername(),user.getPassword().toLowerCase(),user.isEnabled(),
                     getAuthorities(user.getRoles().getName()));
             return loggedInUserDetails;
 

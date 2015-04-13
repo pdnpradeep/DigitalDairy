@@ -39,10 +39,10 @@ public class Role {
 	@GeneratedValue
 
 	private Integer id;
-	
+
 	private Integer name;
-	@OneToOne(mappedBy="roles")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
-	
+
 
 }

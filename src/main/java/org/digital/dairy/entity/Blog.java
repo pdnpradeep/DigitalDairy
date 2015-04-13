@@ -21,8 +21,8 @@ public class Blog {
 	
 	private String name;
 	
-	private String url;
+/*	private String url;
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private User user;
+	private User user;*/
 }

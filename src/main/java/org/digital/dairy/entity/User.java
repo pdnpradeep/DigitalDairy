@@ -7,16 +7,11 @@ import javax.persistence.*;
 
 import lombok.Data;
 import lombok.ToString;
-/*
-@Data
+
+/*@Data
 @ToString*/
 @Entity
 public class User {
-
-		@Id
-		@GeneratedValue
-		private Integer id;
-
     public Integer getId() {
         return id;
     }
@@ -25,12 +20,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getUsername() {
@@ -39,6 +34,30 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -57,14 +76,14 @@ public class User {
         this.roles = roles;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
-
+/*
     public List<Blog> getBlogs() {
         return blogs;
     }
@@ -73,18 +92,40 @@ public class User {
         this.blogs = blogs;
     }
 
-    @Column(unique=true)
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }*/
+
+        public User() {
+            super();
+            this.enabled=false;
+        }
+        @Id
+		@GeneratedValue
+		private Integer id;
+        private String firstname;
+        private String lastname;
+        @Column(unique=true)
 		private String username;
-		
+        @Column(unique=true)
 		private String email;
-		
+        @Column(unique=true)
+        private String phoneno;
 		private String password;
-		@OneToOne
+		@OneToOne(cascade = CascadeType.ALL)
 		private Role roles;
-		@OneToMany(mappedBy = "user")
+        @Column(name = "enabled")
+        private boolean enabled;
+
+	/*	@OneToMany(mappedBy = "user")
 		private List<Blog> blogs;
 		@OneToMany(mappedBy = "blog")
 		private List<Item> items;
-
+*/
 
 }
