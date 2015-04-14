@@ -20,8 +20,8 @@
          <!-- SMTP settings -->
          <property name="host" value="smtp.gmail.com"/>
          <property name="port" value="465"/>
-         <property name="username" value="p.d.n.pradeep@gmail.com"/>
-         <property name="password" value="93911263531"/>
+         <property name="username" value="xxxx@gmail.com"/>
+         <property name="password" value="xxxxx"/>
          <!-- additional properties specific to JavaMail -->
          <property name="javaMailProperties">
              <props>
@@ -111,9 +111,13 @@
 -->
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="customAuthenticationUserDetailsService">
+            <security:password-encoder ref="encoder" />
           <!--  <security:password-encoder hash="md5"/>-->
         </security:authentication-provider>
     </security:authentication-manager>
     <bean id="customAuthenticationUserDetailsService"  class="org.digital.dairy.security.CustomAuthenticationUserDetailsService"></bean>
+    <bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+        <constructor-arg value="T2b9QjLOc162d4Oa"/>
+    </bean>
 
 </beans>
