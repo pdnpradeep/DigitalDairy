@@ -1,15 +1,12 @@
-package org.digital.dairy.eventandlistener.registration.listener.registration;
+package org.digital.dairy.eventandlistener.listener.registration;
 
 
 import org.digital.dairy.entity.User;
-import org.digital.dairy.eventandlistener.registration.event.registration.OnRegistrationCompleteEvent;
+import org.digital.dairy.eventandlistener.event.registration.OnRegistrationCompleteEvent;
 import org.digital.dairy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.MessageSource;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package org.digital.dairy.eventandlistener.registration.event.registration;
+package org.digital.dairy.eventandlistener.event.registration;
 
 import org.digital.dairy.entity.User;
 import org.springframework.context.ApplicationEvent;
