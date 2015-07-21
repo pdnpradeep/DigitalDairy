@@ -15,13 +15,14 @@
 <context:component-scan base-package="org.digital.dairy">
 	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 </context:component-scan>
+
   <!--  Mail setting using spring-->
      <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
          <!-- SMTP settings -->
          <property name="host" value="smtp.gmail.com"/>
          <property name="port" value="465"/>
-         <property name="username" value="xxxx@gmail.com"/>
-         <property name="password" value="xxxxx"/>
+         <property name="username" value="p.d.n.pradeep@gmail.com"/>
+         <property name="password" value="93911263531"/>
          <!-- additional properties specific to JavaMail -->
          <property name="javaMailProperties">
              <props>
@@ -79,7 +80,7 @@
 	<bean class="org.hibernate.ejb.HibernatePersistence"/>
 	</property>
 </bean>
-<!-- Trasaction Mabager INIT -->
+<!-- Trasaction Manager INIT -->
 <tx:annotation-driven />
 <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
 	<property name="dataSource" ref="dataSource"/>
@@ -91,6 +92,8 @@
 <security:http pattern="/login.html" security="none" />
 <security:http pattern="/registration.html" security="none" />
 <security:http pattern="/regitrationConfirm.html" security="none" />
+<security:http pattern="/executejobs.html" security="none" />
+    <security:http pattern="/execute.html" security="none" />
 <security:http use-expressions="true">
 <security:intercept-url  pattern="/**" access="hasRole('ROLE_USER')"/>
 <security:form-login login-page="/login.html"  authentication-failure-url="/login.html?error" default-target-url="/" always-use-default-target="true"/>
@@ -102,8 +105,8 @@
 <security:authentication-manager>
 	<security:authentication-provider>
 		<security:user-service>
-			<security:user name="user"
 			password="password"
+			<security:user name="user"
 			authorities="ROLE_USER"/>
 		</security:user-service>
 	</security:authentication-provider>
@@ -111,13 +114,21 @@
 -->
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="customAuthenticationUserDetailsService">
-            <security:password-encoder ref="encoder" />
+<!--            <security:password-encoder ref="encoder" />-->
           <!--  <security:password-encoder hash="md5"/>-->
         </security:authentication-provider>
     </security:authentication-manager>
     <bean id="customAuthenticationUserDetailsService"  class="org.digital.dairy.security.CustomAuthenticationUserDetailsService"></bean>
     <bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
         <constructor-arg value="T2b9QjLOc162d4Oa"/>
+    </bean>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:scheduler.properties</value>
+            </list>
+        </property>
     </bean>
 
 </beans>

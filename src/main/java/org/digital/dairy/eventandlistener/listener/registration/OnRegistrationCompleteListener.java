@@ -1,3 +1,4 @@
+
 package org.digital.dairy.eventandlistener.listener.registration;
 
 
@@ -37,7 +38,7 @@ public class OnRegistrationCompleteListener implements ApplicationListener<OnReg
         User user = event.getUser();
         System.out.println("sendingConfirmRegistrationLink");
         String token = UUID.randomUUID().toString();
-        userService.createVerificationToken(user, token);
+      /*  userService.createVerificationToken(user, token);*/
         /*Mail Sending using Spring JavaMailSender and creating mail using SimpleMailMessage*/
         String recipientAddress = user.getEmail();
         System.out.println("Mail TO:"+recipientAddress);

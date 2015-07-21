@@ -8,7 +8,9 @@ import org.digital.dairy.entity.VerificationToken;
  */
 public interface UserService {
     User createUserAccount(User user);
-    void createVerificationToken(User user,String token);
+    void createVerificationToken(String userEmail,String token);
     VerificationToken getVerificationToken(String token);
     void saveRegistrationUser(User user);
+    void resendVerificationToken();
+    String findUserEmailID(String Username);
 }

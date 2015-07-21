@@ -14,6 +14,13 @@
         <put-attribute name="title" value="registration to Digital Dairy" />
         <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
     </definition>
+
+    <!--This is For executejobsmanger-->
+    <definition name="executejobsManger" template="/WEB-INF/jsp/executejobsmanger.jsp" >
+        <put-attribute name="title" value="executejobsmanger to Digital Dairy" />
+        <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
+    </definition>
+
     <!--This is common to all-->
     <definition name="common" template="/WEB-INF/layouts/common.jsp">
 	    <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />

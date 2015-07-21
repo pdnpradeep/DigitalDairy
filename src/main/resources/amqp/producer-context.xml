@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+									 http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd">
+
+    <!--specifying Message type is JSON using following line bean-->
+    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter"/>
+    <!-- create a bean which can send message to EXCHANGE for the Java program to call -->
+    <!--Template declarations with exchange name-->
+    <rabbit:template id="asyncConfromationMailProducer" connection-factory="connectionFactory" exchange="EXCHANGE-CONFORMATION-MAIL" message-converter="jsonMessageConverter"/>
+    <!-- create myExchange and bind Queue with routingkey to the EXCHANGE-->
+    <!--Binding exchange with Specific queue by using 'exchange name and pattern send by sender'-->
+    <rabbit:topic-exchange id="conformationMailExchange" name="EXCHANGE-CONFORMATION-MAIL">
+        <rabbit:bindings>
+            <rabbit:binding queue="conformationMailQueue" pattern="CONFORMATION.*.#"/>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+    <!--Queue define with giving name to queue-->
+    <rabbit:queue id="conformationMailQueue" name="QUEUE-CONFORMATION-MAIL" queue-arguments="defaultQueueArguments"/>
+
+    <!--  Dead letter queue and exchange -->
+    <rabbit:queue id="ListenerFailureQueue" name="QUEUE-LISTENER-FAILURE" />
+
+    <rabbit:topic-exchange id="ListenerFailureExchange" name="EXCHANGE-LISTENER-FAILURE">
+        <rabbit:bindings>
+            <rabbit:binding queue="ListenerFailureQueue" pattern="#"/>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <rabbit:queue-arguments id="defaultQueueArguments">
+        <entry key="x-dead-letter-exchange" value="EXCHANGE-LISTENER-FAILURE" />
+    </rabbit:queue-arguments>
+
+
+</beans>

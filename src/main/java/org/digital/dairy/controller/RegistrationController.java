@@ -1,5 +1,6 @@
 package org.digital.dairy.controller;
 
+import org.digital.dairy.async.producer.RegistrationConformationMailProducer;
 import org.digital.dairy.entity.User;
 import org.digital.dairy.entity.VerificationToken;
 import org.digital.dairy.eventandlistener.event.registration.OnRegistrationCompleteEvent;
@@ -8,10 +9,7 @@ import org.digital.dairy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.Calendar;
@@ -28,6 +26,9 @@ public class RegistrationController {
 
     @Autowired
     ApplicationEventPublisher eventPublisher;
+
+    @Autowired
+    RegistrationConformationMailProducer registrationConformationMailProducer;
 
     @Autowired
     UserRepository userRepository;
@@ -47,8 +48,9 @@ public class RegistrationController {
         if(registered != null) {
             try {
                 String appUrl = request.getContextPath();
-                eventPublisher.publishEvent(new OnRegistrationCompleteEvent
-                        (user, request.getLocale(), appUrl));
+                registrationConformationMailProducer.sendConformstionMail(user, request.getLocale(), appUrl);
+               /* eventPublisher.publishEvent(new OnRegistrationCompleteEvent
+                        (user, request.getLocale(), appUrl));*/
             } catch (Exception me) {
                 //  return new ModelAndView("emailError", "user", accountDto);
             }
@@ -70,5 +72,19 @@ public class RegistrationController {
         userService.saveRegistrationUser(user);
 
         return "login";
+    }
+
+    @RequestMapping(value = "executejobs")
+    public String executeJobs(){
+        System.out.println("executeJobs trigger");
+        return "executejobsManger";
+    }
+
+    @RequestMapping(value = "execute")
+    @ResponseBody
+    public String execute(){
+        System.out.println("executeJobs trigger1");
+        userService.resendVerificationToken();
+        return "executejobsManger";
     }
 }
