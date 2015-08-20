@@ -1,12 +1,6 @@
-package org.digital.dairy.entity;
-
-import java.util.Collection;
-import java.util.List;
+package org.digital.dairy.model.entity;
 
 import javax.persistence.*;
-
-import lombok.Data;
-import lombok.ToString;
 
 /*@Data
 @ToString*/

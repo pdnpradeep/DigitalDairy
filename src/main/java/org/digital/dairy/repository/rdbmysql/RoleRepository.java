@@ -1,6 +1,6 @@
 package org.digital.dairy.repository.rdbmysql;
 
-import org.digital.dairy.entity.Role;
+import org.digital.dairy.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

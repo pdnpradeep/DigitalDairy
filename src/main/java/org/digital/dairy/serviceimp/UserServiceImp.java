@@ -1,10 +1,9 @@
 package org.digital.dairy.serviceimp;
 
 import org.digital.dairy.async.producer.RegistrationConformationMailProducer;
-import org.digital.dairy.async.vo.ResentConformationMailVO;
-import org.digital.dairy.entity.Role;
-import org.digital.dairy.entity.User;
-import org.digital.dairy.entity.VerificationToken;
+import org.digital.dairy.model.entity.Role;
+import org.digital.dairy.model.entity.User;
+import org.digital.dairy.model.entity.VerificationToken;
 import org.digital.dairy.repository.rdbmysql.UserRepository;
 import org.digital.dairy.repository.rdbmysql.VerificationTokenRepository;
 import org.digital.dairy.service.UserService;

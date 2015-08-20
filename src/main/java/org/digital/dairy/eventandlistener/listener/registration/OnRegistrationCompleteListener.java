@@ -2,7 +2,7 @@
 package org.digital.dairy.eventandlistener.listener.registration;
 
 
-import org.digital.dairy.entity.User;
+import org.digital.dairy.model.entity.User;
 import org.digital.dairy.eventandlistener.event.registration.OnRegistrationCompleteEvent;
 import org.digital.dairy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

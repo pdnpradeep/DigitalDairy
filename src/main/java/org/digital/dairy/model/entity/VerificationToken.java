@@ -1,4 +1,4 @@
-package org.digital.dairy.entity;
+package org.digital.dairy.model.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

@@ -1,7 +1,7 @@
 package org.digital.dairy.service;
 
-import org.digital.dairy.entity.User;
-import org.digital.dairy.entity.VerificationToken;
+import org.digital.dairy.model.entity.User;
+import org.digital.dairy.model.entity.VerificationToken;
 
 /**
  * Created by Pradeep.P on 11-04-2015.

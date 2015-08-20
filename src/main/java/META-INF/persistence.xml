@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="DigitalDairy">
-		<class>org.digital.dairy.entity.User</class>
-		<class>org.digital.dairy.entity.Role</class>
-		<class>org.digital.dairy.entity.Blog</class>
-		<class>org.digital.dairy.entity.Item</class>
+		<class>org.digital.dairy.model.entity.User</class>
+		<class>org.digital.dairy.model.entity.Role</class>
+		<class>org.digital.dairy.model.entity.Blog</class>
+		<class>org.digital.dairy.model.entity.Item</class>
 	</persistence-unit>
 </persistence>

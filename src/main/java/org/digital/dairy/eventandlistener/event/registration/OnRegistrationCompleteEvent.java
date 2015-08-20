@@ -1,6 +1,6 @@
 package org.digital.dairy.eventandlistener.event.registration;
 
-import org.digital.dairy.entity.User;
+import org.digital.dairy.model.entity.User;
 import org.springframework.context.ApplicationEvent;
 
 import java.util.Locale;

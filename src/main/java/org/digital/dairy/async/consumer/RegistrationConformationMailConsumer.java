@@ -2,10 +2,8 @@ package org.digital.dairy.async.consumer;
 
 import org.digital.dairy.async.vo.ConformationMailVO;
 import org.digital.dairy.async.vo.ResentConformationMailVO;
-import org.digital.dairy.entity.User;
 import org.digital.dairy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;

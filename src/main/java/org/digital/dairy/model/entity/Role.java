@@ -1,10 +1,7 @@
-package org.digital.dairy.entity;
+package org.digital.dairy.model.entity;
 
 
 import javax.persistence.*;
-
-import lombok.Data;
-import lombok.ToString;
 
 /*@Data
 @ToString*/

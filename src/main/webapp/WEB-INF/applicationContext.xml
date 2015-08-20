@@ -68,13 +68,14 @@
     </bean>
 
 <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
-	<property name="packagesToScan" value="org.digital.dairy.entity"/>
+	<property name="packagesToScan" value="org.digital.dairy.model.entity"/>
 	<property name="dataSource" ref="dataSource"/>
 	<property name="jpaProperties">
 		<props>
-		<prop key="hibernate.show_sql">true</prop>
-		<prop key="hibernate.hbm2ddl.auto">create</prop>
-		</props>
+		<prop key="hibernate.show_sql">true</prop>  <!-- http://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html#configuration-optional-->
+        <prop key="hibernate.format_sql">true</prop>
+		<prop key="hibernate.hbm2ddl.auto">validate</prop> <!-- create &ndash;&gt; Creating DB wnen Start Server;update&ndash;&gt;update schema-->
+        </props>
 	</property>
 	<property name="persistenceProvider">
 	<bean class="org.hibernate.ejb.HibernatePersistence"/>
@@ -94,6 +95,7 @@
 <security:http pattern="/regitrationConfirm.html" security="none" />
 <security:http pattern="/executejobs.html" security="none" />
     <security:http pattern="/execute.html" security="none" />
+    <security:http pattern="/SolrQuery.html" security="none" />
 <security:http use-expressions="true">
 <security:intercept-url  pattern="/**" access="hasRole('ROLE_USER')"/>
 <security:form-login login-page="/login.html"  authentication-failure-url="/login.html?error" default-target-url="/" always-use-default-target="true"/>
@@ -122,6 +124,9 @@
     <bean id="encoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
         <constructor-arg value="T2b9QjLOc162d4Oa"/>
     </bean>
+
+
+
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">

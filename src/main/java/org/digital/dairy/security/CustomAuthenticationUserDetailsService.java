@@ -1,6 +1,6 @@
 package org.digital.dairy.security;
 
-import org.digital.dairy.entity.User;
+import org.digital.dairy.model.entity.User;
 import org.digital.dairy.repository.rdbmysql.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

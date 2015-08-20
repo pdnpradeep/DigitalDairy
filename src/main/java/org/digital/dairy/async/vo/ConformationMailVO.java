@@ -3,7 +3,6 @@ package org.digital.dairy.async.vo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
-import org.digital.dairy.entity.User;
 
 import java.util.Locale;
 

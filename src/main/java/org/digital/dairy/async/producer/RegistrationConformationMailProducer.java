@@ -3,7 +3,7 @@ package org.digital.dairy.async.producer;
 import org.digital.dairy.async.vo.AsyncVO;
 import org.digital.dairy.async.vo.ConformationMailVO;
 import org.digital.dairy.async.vo.ResentConformationMailVO;
-import org.digital.dairy.entity.User;
+import org.digital.dairy.model.entity.User;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

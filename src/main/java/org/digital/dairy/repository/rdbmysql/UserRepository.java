@@ -1,6 +1,6 @@
 package org.digital.dairy.repository.rdbmysql;
 
-import org.digital.dairy.entity.User;
+import org.digital.dairy.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

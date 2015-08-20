@@ -1,18 +1,12 @@
 package org.digital.dairy.repository.rdbmysql;
 
 import org.digital.dairy.async.vo.ResentConformationMailVO;
-import org.digital.dairy.entity.User;
-import org.digital.dairy.entity.VerificationToken;
+import org.digital.dairy.model.entity.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**

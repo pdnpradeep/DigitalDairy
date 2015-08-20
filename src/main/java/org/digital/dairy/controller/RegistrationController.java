@@ -1,9 +1,8 @@
 package org.digital.dairy.controller;
 
 import org.digital.dairy.async.producer.RegistrationConformationMailProducer;
-import org.digital.dairy.entity.User;
-import org.digital.dairy.entity.VerificationToken;
-import org.digital.dairy.eventandlistener.event.registration.OnRegistrationCompleteEvent;
+import org.digital.dairy.model.entity.User;
+import org.digital.dairy.model.entity.VerificationToken;
 import org.digital.dairy.repository.rdbmysql.UserRepository;
 import org.digital.dairy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

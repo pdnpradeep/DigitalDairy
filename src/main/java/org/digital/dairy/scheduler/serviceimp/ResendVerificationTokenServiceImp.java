@@ -1,7 +1,7 @@
 package org.digital.dairy.scheduler.serviceimp;
 
 import org.digital.dairy.async.producer.RegistrationConformationMailProducer;
-import org.digital.dairy.entity.VerificationToken;
+import org.digital.dairy.model.entity.VerificationToken;
 import org.digital.dairy.repository.rdbmysql.VerificationTokenRepository;
 import org.digital.dairy.scheduler.service.ResendVerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
