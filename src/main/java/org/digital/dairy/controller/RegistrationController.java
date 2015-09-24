@@ -3,7 +3,10 @@ package org.digital.dairy.controller;
 import org.digital.dairy.async.producer.RegistrationConformationMailProducer;
 import org.digital.dairy.model.entity.User;
 import org.digital.dairy.model.entity.VerificationToken;
+import org.digital.dairy.model.search.RegisterNamesDo;
 import org.digital.dairy.repository.rdbmysql.UserRepository;
+import org.digital.dairy.repository.search.RegisterNamesDoRepository;
+import org.digital.dairy.service.CommonSolrService;
 import org.digital.dairy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -31,6 +35,14 @@ public class RegistrationController {
 
     @Autowired
     UserRepository userRepository;
+
+
+    @Autowired
+    CommonSolrService commonSolrService;
+
+    @Autowired
+    RegisterNamesDoRepository registerNamesDoRepository;
+
 
     @RequestMapping(value = "/registration",method= RequestMethod.GET)
     public String registration(Map<String, Object> model){
@@ -68,6 +80,13 @@ public class RegistrationController {
             return "registration";
         }
         user.setEnabled(true);
+        registerNamesDoRepository = commonSolrService.getContentResourceRepository();
+		RegisterNamesDo registerNamesDo = new RegisterNamesDo();
+		registerNamesDo.setId(user.getId().toString());
+		registerNamesDo.setTitle(Arrays.asList(user.getEmail()));
+		registerNamesDo.setAuthor(user.getUsername());
+		registerNamesDoRepository.save(registerNamesDo);
+
         userService.saveRegistrationUser(user);
 
         return "login";

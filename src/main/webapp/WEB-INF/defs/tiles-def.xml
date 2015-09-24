@@ -31,4 +31,9 @@
 	    <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
 	  </definition>
 
+    <definition name="upload" extends="common">
+        <put-attribute name="title" value="Upload File Request Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/upload.jsp" />
+    </definition>
+
 </tiles-definitions>

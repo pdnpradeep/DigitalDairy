@@ -5,6 +5,7 @@ import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
+import java.util.List;
 
 /**
  * Created by administrator on 05/08/15.
@@ -16,7 +17,7 @@ public class RegisterNamesDo {
     private String id;
 
     @Field
-    private String title;
+    private List<String> title;
 
     @Field
     private String author;

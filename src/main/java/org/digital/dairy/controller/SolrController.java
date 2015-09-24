@@ -9,6 +9,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.FacetField;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.params.CommonParams;
+import org.digital.dairy.model.search.RegisterNamesDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.stereotype.Controller;
@@ -81,5 +82,48 @@ public class SolrController {
         }
         return null;
         //return "[\"value\",\"idonknow\"]";
+    }
+    @RequestMapping("/searchbuttonclick")
+    @ResponseBody
+    public String searchbuttonclick(@RequestParam("term") String searchText){
+
+        List<RegisterNamesDo> registerNamesDo = new ArrayList<RegisterNamesDo>();
+        StringBuffer querystring = new StringBuffer();
+        querystring.append("*:*");
+        querystring.append("(author:"+searchText+")");
+        SolrQuery solrQuery = new SolrQuery();
+        solrQuery.setParam(CommonParams.Q,querystring.toString());
+        // Enable highlighting option
+        solrQuery.setParam("hl", true);
+        // Specify the fields to be highlighted
+        solrQuery.setParam("hl.fl", "author,id,title");
+        // Specify that entire document should be scanned
+        solrQuery.setParam("hl.maxAnalyzedChars", "-1");
+        solrQuery.setParam("hl.fragsize","200");
+        // Specify the number of snippet to be returned. Set it to 20.
+        solrQuery.setParam("hl.snippets","20");
+        solrQuery.setStart(0);
+        solrQuery.setRows(100);
+        QueryResponse rsp = null;
+        try {
+            rsp = ((SolrServer) solrTemplate.getSolrServer()).query(solrQuery);
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        }
+        System.out.println("result of search button =====>>>" + rsp);
+        registerNamesDo =  rsp.getBeans(RegisterNamesDo.class);
+        System.out.println("got result===="+registerNamesDo);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+        return mapper.writeValueAsString(registerNamesDo);
+        }
+        catch (JsonGenerationException e){
+
+        }catch (JsonMappingException e){
+
+        }catch (Exception e){
+
+        }
+        return "[\"value\",\"idonknow\"]";
     }
 }
